@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:VM="clr-namespace:Sol_Demo.ViewModels"
+             xmlns:AP="clr-namespace:Sol_Demo.Behaviors"
+             mc:Ignorable="d"
+             x:Class="Sol_Demo.Views.MainPage"
+             x:Name="mainPage"
+             >
+
+    <ContentPage.BindingContext>
+        <VM:UserViewModel></VM:UserViewModel>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Entry 
+            x:Name="txtFirstName"
+            Grid.Row="0"
+            Grid.Column="0"
+            Placeholder="First Name"
+            PlaceholderColor="Red"
+            Text="{Binding Users.FirstName, Mode=TwoWay}"
+            >
+
+        </Entry>
+
+        <Entry 
+            x:Name="txtLastName"
+            Grid.Row="1"
+            Grid.Column="0"
+            Placeholder="Last Name"
+            PlaceholderColor="Red"
+            Text="{Binding Users.LastName, Mode=TwoWay}"
+            >
+
+        </Entry>
+
+        
+        <Button 
+            x:Name="btnSubmit"
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Submit"
+            Command="{Binding Submit}"
+            AP:DisplayAlertBoxOnDataBehavior.IsDisplayAlertAttachBehavior="{Binding UsersUi.IsAlertBoxDisplay, Mode=TwoWay}"
+            AP:DisplayAlertBoxOnDataBehavior.UserModelAttachBehavior="{Binding Users, Mode=TwoWay, TargetNullValue={x:Null}}"
+            AP:DisplayAlertBoxOnDataBehavior.ContentPageAttachBehavior="{Binding Source={Reference mainPage}, Mode=TwoWay, TargetNullValue={x:Null}}"
+            >
+
+        </Button>
+
+       
+
+    </Grid>
+
+</ContentPage>
